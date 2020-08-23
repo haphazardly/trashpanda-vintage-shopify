@@ -7,7 +7,7 @@
     <div id="carouselProducts" class="carousel slide" data-ride="carousel">
       <div class="row">
         <div class="col-2">
-          
+
           <ol class="carousel-indicators">
             {% for image in product.images %}
             <li data-target="#carouselProducts" data-slide-to="{{ image.position | minus: 1 }}"
@@ -35,17 +35,19 @@
   <div class="col">
 
     <div class="row mb-3">
+      {% if product.vendor != "Other" %}
+      <span>{{ product.vendor }}</span>
+      {% endif %}
       <h1>{{ product.title }}</h1>
       <span>{{ current_variant.price | money }}</span>
     </div>
 
-
     <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
       <div class="mb-3">
+        {% if product.available %}
         <select name="id" class="form-select" aria-default="Product Variants" id="productSelect">
           {% for variant in product.variants %}
           {% if variant.available %}
-
           <option value="{{ variant.id }}">
             {{ variant.title }}
           </option>
@@ -53,17 +55,24 @@
           {% else %}
 
           <option disabled="disabled">
-            {{ variant.title }} - sold out
-          </option>
+            {{ variant.title }} - Sold Out
+          </option>}
 
           {% endif %}
           {% endfor %}
         </select>
+        {% endif %}
       </div>
-      <div class="input-group mb-3">
-        <label class="input-group-text" id="inputGroup-sizing-default" for="Quantity">Quantity</label>
-        <input type="number" class="form-control" id="Quantity" name="quantity" value="1" min="1" max=>
-        <button class="btn btn-primary" type="submit" name="add" id="AddToCart">Add to cart</button>
+      <div class="mb-3">
+        {% if product.available %} 
+        
+        <button class="btn btn-primary btn-block" type="submit" name="add" id="AddToCart">Add to cart</button>
+        
+        {% else %}
+        
+        <button class="btn btn-primary btn-block" type="submit" name="add" id="AddToCart" disabled>Sold Out</button>
+
+        {% endif %}
       </div>
     </form>
     <div>
@@ -73,7 +82,6 @@
 </div>
 
 <script>
-
 
 
 </script>

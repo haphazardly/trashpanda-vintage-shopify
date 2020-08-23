@@ -3,8 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.20.0",
+    "browser-sync": "^2.26.12"
+  },
   "devDependencies": {
+    "bootstrap": "^5.0.0-alpha1",
+    "css-loader": "^4.2.1",
+    "mini-css-extract-plugin": "^0.10.0",
+    "popper.js": "^1.16.1",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.3",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },

@@ -10,11 +10,12 @@
   {{ content_for_header }} <!-- Header hook for plugins -->
   {{ 'application.css' | asset_url | stylesheet_tag }}
   {{ 'application.js' | asset_url | script_tag }}
+  {% if template.name == "product" %}
+    {{ 'product.js' | asset_url | script_tag }}
+  {% endif %}
 </head> 
 <body>
-
   {% section "menu" %}
-
   <main role="main" class="container">
     {{ content_for_layout }}
   </main>
