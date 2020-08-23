@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">{{ shop.name }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+
+        {% for link in linklists.main-menu.links %}
+          {% assign child_list_handle = link.title | handleize %}
+          
+          {% if linklists[child_list_handle].links != blank %}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{{ link.url }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+              {{ link.title }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for childlink in linklists[child_list_handle].links %}
+              <li>
+                <a class="dropdown-item" href="{{ childlink.url }}">
+                  {{ childlink.title | escape }}
+                </a>
+              </li>
+            {% endfor %}
+            </ul>
+          </li>
+
+        {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+
+        {% endif %}
+        
+      {% endfor %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="/cart">Cart</a>
+      </li>
+      {% if shop.customer_accounts_enabled %}
+      {% if customer %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="/account">Account</a>
+      </li>
+      {{ 'log out'  | customer_logout_link }}
+      {% else %}
+        {{ 'log in ' | customer_login_link }}
+        {{ 'register' | customer_register_link }}
+      {% endif %}
+    {% endif %}
+
+      </ul>
+      <form class="d-flex" action="/search" method="get" role="search">
+        <label for="Search-{{ section.id }}" class="d-none">
+          {{ 'general.search.placeholder' | t }}
+        </label>
+        <input type="search" 
+               name="q" 
+               id="Search-{{ section.id }}" 
+               value="{{ search.terms | escape }}" 
+               placeholder="{{ 'general.search.placeholder' | t }}" 
+               class="form-control mr-2" 
+               aria-label="Search">
+        <button class="btn btn-outline-success">        
+          <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+  {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ] 
+}
+{% endschema %}
+
+
+
+

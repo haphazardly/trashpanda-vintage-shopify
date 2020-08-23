@@ -1,0 +1,79 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+<div class="row">
+  <div class="col-8">
+
+    <div id="carouselProducts" class="carousel slide" data-ride="carousel">
+      <div class="row">
+        <div class="col-2">
+          
+          <ol class="carousel-indicators">
+            {% for image in product.images %}
+            <li data-target="#carouselProducts" data-slide-to="{{ image.position | minus: 1 }}"
+              class="border {% if image.position == 1 %} active {% endif %}">
+              <img class="d-block w-100" src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}">
+            </li>
+            {% endfor %}
+          </ol>
+          
+        </div>
+        <div class="col">
+          <div class="carousel-inner">
+            {% for image in product.images %}
+            <div class="carousel-item{% if image.position == 1 %} active{% endif %}">
+              <img class="d-block w-100" src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}">
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+
+    <div class="row mb-3">
+      <h1>{{ product.title }}</h1>
+      <span>{{ current_variant.price | money }}</span>
+    </div>
+
+
+    <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+      <div class="mb-3">
+        <select name="id" class="form-select" aria-default="Product Variants" id="productSelect">
+          {% for variant in product.variants %}
+          {% if variant.available %}
+
+          <option value="{{ variant.id }}">
+            {{ variant.title }}
+          </option>
+
+          {% else %}
+
+          <option disabled="disabled">
+            {{ variant.title }} - sold out
+          </option>
+
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <div class="input-group mb-3">
+        <label class="input-group-text" id="inputGroup-sizing-default" for="Quantity">Quantity</label>
+        <input type="number" class="form-control" id="Quantity" name="quantity" value="1" min="1" max=>
+        <button class="btn btn-primary" type="submit" name="add" id="AddToCart">Add to cart</button>
+      </div>
+    </form>
+    <div>
+      {{ product.description }}
+    </div>
+  </div>
+</div>
+
+<script>
+
+
+
+</script>

@@ -1,0 +1,33 @@
+@import '~bootstrap';
+
+#carouselProducts .carousel-indicators {
+    position: relative;
+    right: initial;
+    bottom: initial;
+    left: initial;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: initial;
+    margin-left: initial;
+    justify-content: center;
+    list-style: none;
+    align-items: center;
+}
+
+#carouselProducts .carousel-indicators li {
+    box-sizing: content-box;
+    flex: 1;
+    width: 100px;
+    height: initial;
+    margin-right: initial;
+    margin-left: initial;
+    margin-bottom: 1em;
+    text-indent: -999px;
+    cursor: pointer;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    transition: opacity .6s ease;
+}
