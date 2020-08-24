@@ -1,4 +1,7 @@
 import '../sass/main.scss';
+import feather from 'feather-icons';
 
-import { Tooltip, Toast, Popover } from 'bootstrap';
+document.addEventListener('DOMContentLoaded', function() {
+    feather.replace(); 
+})
 

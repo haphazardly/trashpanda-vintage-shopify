@@ -5,7 +5,9 @@
   "private": true,
   "dependencies": {
     "axios": "^0.20.0",
-    "browser-sync": "^2.26.12"
+    "browser-sync": "^2.26.12",
+    "bulma": "^0.9.0",
+    "feather-icons": "^4.28.0"
   },
   "devDependencies": {
     "bootstrap": "^5.0.0-alpha1",

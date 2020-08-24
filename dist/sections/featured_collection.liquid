@@ -1,13 +1,86 @@
-{%- comment -%}
-  This is a required section for the Shopify Theme Store.
-  It is available in the "Featured Collection" section in the theme editor.
+{% assign header_font = section.settings.hero_font_title %}
 
-  Theme Store required settings
-  - Collection
+{% if section.settings.featured_image != blank %}
+  <style>
 
-  Theme Store optional settings
-  - Heading: title of the featured collection section
-{%- endcomment -%}
+     {{ header_font | font_face }}
+
+    .hero-body .title {
+      font-family: {{ header_font.family }};
+    }
+
+    .hero-body .title, .hero-body .subtitle {
+      color: {{ section.settings.font_color }};
+    }
+
+    @media screen and (max-width: 150px) {
+      .hero--{{ section.id }} {
+        background-image: url('{{ section.settings.featured_image | img_url: '300x300' }}');
+      }
+    }
+
+    @media screen and (min-width: 151px) and (max-width: 300px) {
+      .hero--{{ section.id }} {
+        background-image: url('{{ section.settings.featured_image | img_url: '300x300' }}');
+      }
+    }
+
+    @media screen and (min-width: 301px) and (max-width: 600px) {
+      .hero--{{ section.id }} {
+        background-image: url('{{ section.settings.featured_image | img_url: '600x600' }}');
+      }
+    }
+
+    @media screen and (min-width: 601px) and (max-width: 800px) {
+      .hero--{{ section.id }} {
+        background-image: url('{{ section.settings.featured_image | img_url: '900x900' }}');
+      }
+    }
+
+    @media screen and (min-width: 801px) and (max-width: 1000px) {
+      .hero--{{ section.id }} {
+        background-image: url('{{ section.settings.featured_image | img_url: '1000x1000' }}');
+      }
+    }
+
+    @media screen and (min-width: 1001px) {
+      .hero--{{ section.id }} {
+        background-image: url('{{ section.settings.featured_image | img_url: '2000x2000' }}');
+      }
+    }
+
+    .hero-overlay--dark {
+      background: linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.20), rgba(0,0,0,.20));
+    }
+
+    .hero-overlay--light {
+      background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.20), rgba(255,255,255,.20));
+    }
+
+  </style>
+{% endif %}
+
+
+<section class="hero hero--{{ section.id }} is-large ">
+  <div class="hero-body hero-overlay--{{ section.settings.overlay_color }}"> 
+    <div class="container	has-text-centered">
+      <h1 class="title">
+      
+       {{ section.settings.title | escape  }} 
+      </h1>
+       {% if section.settings.text != blank %}
+      <h2 class="subtitle">
+        {{ section.settings.text }}
+      </h2>
+      <a href="{{ section.settings.button_link }}" class="button is-dark">
+        <span class="mr-1">{{ section.settings.button_label }}</span>
+        <i data-feather="arrow-right"></i>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
 <section class="featured-collection">
   {% if section.settings.title != blank %}
     <h2 class="featured-collection__title">{{ section.settings.title | escape }}</h2>
@@ -69,6 +142,55 @@
         "id": "title",
         "label": "Heading",
         "default": "Featured collection"
+      },
+      {
+        "type": "font_picker",
+        "id": "hero_font_title",
+        "label": "Font",
+        "default": "work_sans_n6"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
+      },
+      {
+        "type": "image_picker",
+        "id": "featured_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "overlay_color",
+        "label": "Gradient Overlay",
+        "default": "dark",
+        "options": [
+          {
+            "value": "dark",
+            "label": "Dark"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "font_color",
+        "label": "Font Overlay",
+        "default": "#000000"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
       },
       {
         "id": "collection",
