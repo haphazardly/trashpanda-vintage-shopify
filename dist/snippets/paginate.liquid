@@ -1,46 +1,34 @@
-<nav aria-label="Collection Navigation">
-  <ul class="pagination justify-content-center">
-
+<section class="section">
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
     {% if paginate.previous.is_link %}
-
-    <li class="page-item">
-      <a class="page-link" href="{{ paginate.previous.url }}" aria-label="{{ paginate.previous.title }}">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-
-    {% endif %}
-
-    {% for page in paginate.parts %}
-    {% if paginate.current_page == page.title %}
-
-    <li class="page-item active" aria-current="page">
-      <a class="page-link" href="{{ page.url }}">
-        {{ page.title }}<span class="sr-only">(current)</span>
-      </a>
-    </li>
-
-    {% else %}
-
-    <li class="page-item">
-      <a class="page-link" href="{{ page.url }}">
-        {{ page.title }}
-      </a>
-    </li>
-
-    {% endif %}
-    {% endfor %}
-
-  {% if paginate.next.is_link %}
-
-  <li class="page-item">
-    <a class="page-link" aria-label="Next" href="{{ paginate.next.url }}" aria-label="{{ paginate.next
-    .title }}">
-      <span aria-hidden="true">&raquo;</span>
+    <a class="pagination-previous" href="{{ paginate.previous.url }}" aria-label="{{ paginate.previous.title }}">
+      <i data-feather="arrow-left"></i>
     </a>
-  </li>
+    {% endif %}
+  
+    <ul class="pagination-list">
+    {% for page in paginate.parts %}
+      {% if paginate.current_page == page.title %}
+      <li aria-current="page">
+        <a class="pagination-link is-current" href="{{ page.url }}" aria-label="Goto page {{ page.title }}">
+          {{ page.title }}<span class="is-hidden">(current)
+          </span>
+        </a>
+      </li>
+      {% else %}
+      <li class="page-item">
+          <a href="{{ page.url }}" class="pagination-link" aria-label="Goto page {{ page.title }}">
+            {{ page.title }}
+          </a>
+      </li>
+      {% endif %}
+    {% endfor %}
+    </ul>
 
-  {% endif %}
-
-  </ul>
-</nav>
+    {% if paginate.next.is_link %}
+    <a class="pagination-next" href="{{ paginate.next.url }}" aria-label="{{ paginate.next.title }}">
+      <i data-feather="arrow-right"></i>
+    </a>
+    {% endif %}
+  </nav>
+</section>

@@ -1,0 +1,116 @@
+$mobile-sm: 480px !default;
+$mobile-lg: 600px !default;
+
+@mixin mobile-sm {
+  @media screen and (max-width: $mobile-sm - 1), print {
+    @content;
+  }
+}
+
+/**
+ * Columns
+ */
+ .column {
+    @include mobile-sm {
+      &.is-narrow-mobile-sm {
+        flex: none;
+      }
+  
+      &.is-full-mobile-sm {
+        flex: none;
+        width: 100%;
+      }
+  
+      &.is-three-quarters-mobile-sm {
+        flex: none;
+        width: 75%;
+      }
+  
+      &.is-two-thirds-mobile-sm {
+        flex: none;
+        width: 66.6666%;
+      }
+  
+      &.is-half-mobile-sm {
+        flex: none;
+        width: 50%;
+      }
+  
+      &.is-one-third-mobile-sm {
+        flex: none;
+        width: 33.3333%;
+      }
+  
+      &.is-one-quarter-mobile-sm {
+        flex: none;
+        width: 25%;
+      }
+  
+      &.is-one-fifth-mobile-sm {
+        flex: none;
+        width: 20%;
+      }
+  
+      &.is-two-fifths-mobile-sm {
+        flex: none;
+        width: 40%;
+      }
+  
+      &.is-three-fifths-mobile-sm {
+        flex: none;
+        width: 60%;
+      }
+  
+      &.is-four-fifths-mobile-sm {
+        flex: none;
+        width: 80%;
+      }
+  
+      &.is-offset-three-quarters-mobile-sm {
+        margin-left: 75%;
+      }
+  
+      &.is-offset-two-thirds-mobile-sm {
+        margin-left: 66.6666%;
+      }
+  
+      &.is-offset-half-mobile-sm {
+        margin-left: 50%;
+      }
+  
+      &.is-offset-one-third-mobile-sm {
+        margin-left: 33.3333%;
+      }
+  
+      &.is-offset-one-quarter-mobile-sm {
+        margin-left: 25%;
+      }
+  
+      &.is-offset-one-fifth-mobile-sm {
+        margin-left: 20%;
+      }
+  
+      &.is-offset-two-fifths-mobile-sm {
+        margin-left: 40%;
+      }
+  
+      &.is-offset-three-fifths-mobile-sm {
+        margin-left: 60%;
+      }
+  
+      &.is-offset-four-fifths-mobile-sm {
+        margin-left: 80%;
+      }
+  
+      @for $i from 1 through 12 {
+        &.is-#{$i}-mobile-sm {
+          flex: none;
+          width: percentage($i / 12);
+        }
+  
+        &.is-offset-#{$i}-mobile-sm {
+          margin-left: percentage($i / 12);
+        }
+      }
+    }
+}

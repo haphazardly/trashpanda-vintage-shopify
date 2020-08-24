@@ -14,41 +14,47 @@
     }
 
     @media screen and (max-width: 150px) {
-      .hero--{{ section.id }} {
+      .hero--featured-collection {
         background-image: url('{{ section.settings.featured_image | img_url: '300x300' }}');
       }
     }
 
     @media screen and (min-width: 151px) and (max-width: 300px) {
-      .hero--{{ section.id }} {
+      .hero--featured-collection {
         background-image: url('{{ section.settings.featured_image | img_url: '300x300' }}');
       }
     }
 
     @media screen and (min-width: 301px) and (max-width: 600px) {
-      .hero--{{ section.id }} {
+      .hero--featured-collection {
         background-image: url('{{ section.settings.featured_image | img_url: '600x600' }}');
       }
     }
 
     @media screen and (min-width: 601px) and (max-width: 800px) {
-      .hero--{{ section.id }} {
+      .hero--featured-collection {
         background-image: url('{{ section.settings.featured_image | img_url: '900x900' }}');
       }
     }
 
     @media screen and (min-width: 801px) and (max-width: 1000px) {
-      .hero--{{ section.id }} {
+      .hero--featured-collection {
         background-image: url('{{ section.settings.featured_image | img_url: '1000x1000' }}');
       }
     }
-
-    @media screen and (min-width: 1001px) {
-      .hero--{{ section.id }} {
+ 
+    @media screen and (min-width: 1001px) and (max-width: 2000px) {
+      .hero--featured-collection {
         background-image: url('{{ section.settings.featured_image | img_url: '2000x2000' }}');
       }
     }
-
+ 
+    @media screen and (min-width: 2001px) {
+      .hero--featured-collection {
+        background-image: url('{{ section.settings.featured_image | img_url: '3000x3000' }}');
+      }
+    }
+    
     .hero-overlay--dark {
       background: linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.20), rgba(0,0,0,.20));
     }
@@ -60,20 +66,20 @@
   </style>
 {% endif %}
 
-
-<section class="hero hero--{{ section.id }} is-large ">
+<section class="hero hero--featured-collection is-large">
   <div class="hero-body hero-overlay--{{ section.settings.overlay_color }}"> 
     <div class="container	has-text-centered">
       <h1 class="title">
-      
-       {{ section.settings.title | escape  }} 
+        {{ section.settings.title | escape  }} 
       </h1>
-       {% if section.settings.text != blank %}
+        {% if section.settings.text != blank %}
       <h2 class="subtitle">
         {{ section.settings.text }}
       </h2>
       <a href="{{ section.settings.button_link }}" class="button is-dark">
-        <span class="mr-1">{{ section.settings.button_label }}</span>
+        <span class="mr-1">
+          {{ section.settings.button_label }}
+        </span>
         <i data-feather="arrow-right"></i>
       </a>
       {% endif %}
@@ -81,57 +87,75 @@
   </div>
 </section>
 
-<section class="featured-collection">
-  {% if section.settings.title != blank %}
-    <h2 class="featured-collection__title">{{ section.settings.title | escape }}</h2>
-  {% endif %}
-
-  {%- assign collection = collections[section.settings.collection] -%}
-
-  {% for product in collection.products limit: 6 %}
-    <a href="{{ product.url | within: collection }}" class="featured-collection-item">
-      {% if product.featured_image != blank %}
-        <div class="featured-collection__image">
-          {% include 'responsive-image' with
-            image: product.featured_image,
-            max_width: 480,
-            max_height: 480
-          %}
+  <section class="section">
+    <div class="columns">
+      <div class="column">
+        <h1 class="is-size-4">{{ section.settings.title | escape }}</h1><br>
+      </div>
+    </div>
+    <div id="featuredItems" class="row columns is-multiline is-mobile">
+      {%- assign collection = collections[section.settings.collection] -%}
+      {% for product in collection.products limit: 6 %}
+      <div class="column is-half-mobile is-one-third-tablet is-one-third-desktop is-2-fullhd is-12-mobile-sm">
+        <div class="card bm--card-equal-height large">
+          {% if product.featured_image != blank %}
+          <div class="card-image is-16by9">
+            <a href="{{ product.url | within: collection }}">
+              <figure class="image"><img src="{{ product.featured_image | img_url: '600x600' }}" alt="Image"></figure>
+            </a>
+          </div>
+          {% endif %}
+        <div class="card-content">
+          <div class="content">
+            <p>{{ product.title | escape }}</p>
+          </div>
         </div>
-      {% endif %}
- 
-      <p>{{ product.title | escape }}</p>
-      <span>
-        {% if product.compare_at_price > product.price %}
+        <footer class="card-footer">
+        {% if product.compare_at_price > product.price %} 
           {% if product.price_varies %}
-            {%- assign sale_price = product.price | money -%}
+          
+          {%- assign sale_price = product.price | money -%}
+          
+          <span class="price card-footer-item">
             {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+          </span>
+          
           {% else %}
-            {{ 'products.product.on_sale' | t }}
+          <!-- Hidden for now -->
+          <!-- {{ 'products.product.on_sale' | t }} -->
+          <span class="price card-footer-item">
             {{ product.price | money }}
+          </span>
           {% endif %}
-        {% else %}
+          
+          {% else %}
+          
           {% if product.price_varies %}
+          
             {%- assign price = product.price | money -%}
+            
             {{ 'products.product.from_text_html' | t: price: price }}
+          
           {% else %}
+          <span class="price card-footer-item">
             {{ product.price | money }}
+          </span>
           {% endif %}
+          
         {% endif %}
-      </span>
-    </a>
-  {% else %}
-    {% for i in (1..6) %}
-      <a href="#" class="featured-collection-item">
-        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
-
-        <p>{{ 'homepage.onboarding.product_title' | t }}</p>
-        <p>{{ 1999 | money }}</p>
-      </a>
+        </footer>
+      </div>
+    </div>
     {% endfor %}
-  {% endfor %}
-</section>
+    </div>
+  </section>
+
+
+
+
+
+
+
 
 {% schema %}
   {

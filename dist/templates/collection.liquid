@@ -1,36 +1,48 @@
 {% paginate collection.products by 12 %}
 
-  <h1>{{ collection.title }}</h1>
 
-  <div id="plp" class="container">
-    <div class="row">
-
-    {% for product in collection.products %}
-
-    <div class="col">
-      <!-- {% unless product.available %}<br><strong>sold out</strong>{% endunless %} -->
-      <a href="{{ product.url | within: collection }}">
-        <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}">
-      </a>
-      <a href="{{ product.url | within: collection }}">
-        {{ product.title }}
-      </a>
-      {{ product.price | money }}
+<section class="section">
+  <div class="columns">
+    <div class="column">
+      <h1 class="is-size-4">{{ collection.title }}</h1><br>
     </div>
-
-    {% else %}
-
-    <p>no matches</p>
-
-    {% endfor %}
-
   </div>
+
+
+
+<div class="row columns is-multiline is-mobile">
+{% for product in collection.products %}
+<div class="column is-half-mobile is-one-third-tablet is-one-third-desktop is-2-fullhd is-12-mobile-sm">
+<div class="card bm--card-equal-height large">
+<!-- {% unless product.available %}<br><strong>sold out</strong>{% endunless %} -->
+<div class="card-image is-16by9"> 
+<a href="{{ product.url | within: collection }}">
+<figure class="image"><img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}"></figure>
+</a>
+<div class="card-content">
+<div class="content">
+<p>{{ product.title | escape }}</p>
 </div>
+</div>
+<span class="price card-footer-item">
+{{ product.price | money }}
+</span>
+</div>
+</div>
+</div>
+
+{% else %}
+
+<p>no matches</p>
+
+{% endfor %}
+
+</div>
+
+</section>
 
 {% include 'paginate' %}
 
+
+
 {% endpaginate %}
-
-
-
-

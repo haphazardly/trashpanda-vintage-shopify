@@ -1,3 +1,20 @@
-.widget-featured-collection {
+.hero--featured-collection  {
+    background-position: center;
+}
 
+.featured-collection__image {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.featured-collection__desc {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#featuredItems {
+    
 }

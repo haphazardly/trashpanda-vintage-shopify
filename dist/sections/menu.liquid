@@ -1,11 +1,10 @@
-<div class="navbar-container{% if template.name == "index" %} navbar-container--absolute{% endif %}">
-<div class="container">
-  <nav class="navbar {% if template.name != "index" %} is-white{% endif %}" role="navigation" aria-label="main navigation">
+<div class="navbar-container">
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="{{ shop.secure_url }}">
         {{ shop.name }}
       </a>
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="primary_navbar">
+      <a role="button" class="navbar-burger burger navbar-item-mobile" aria-label="menu" aria-expanded="false" data-target="primary_navbar">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -65,7 +64,6 @@
       </div>
     </div>
   </nav>
-</div>
 </div>
 {% schema %}
 {
