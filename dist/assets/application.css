@@ -10038,3 +10038,42 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 .navbar-burger {
   margin-left: initial;
 }
+
+.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.search-close {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+}
+
+.search-open {
+  cursor: pointer;
+}
+
+#searchModal.hero {
+  background: rgba(18, 18, 18, 0.95);
+  color: #fafafa;
+}
+#searchModal input:focus, #searchModal textarea:focus, #searchModal select:focus {
+  box-shadow: 0 0 0 0 transparent;
+}
+#searchModal .input, #searchModal .button {
+  border-radius: 0px !important;
+  border: 0px solid transparent;
+  border-bottom: 2px solid #fafafa;
+  background: transparent;
+  color: #fafafa;
+}
+#searchModal .input::placeholder, #searchModal .button::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(250, 250, 250, 0.7);
+}

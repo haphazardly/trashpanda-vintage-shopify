@@ -27,3 +27,46 @@
 .navbar-burger {
     margin-left: initial;
 }
+
+.is-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.search-close {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+}
+
+.search-open {
+    cursor: pointer;
+}
+
+#searchModal {
+    &.hero {
+        background: rgba($black-bis, .95);
+        color: $white-bis;
+    }
+
+    input:focus, textarea:focus, select:focus{
+        box-shadow: 0 0 0 0 transparent;
+    }
+
+    .input, .button {
+        border-radius: 0px !important;
+        border: 0px solid transparent;
+        border-bottom: 2px solid $white-bis;
+        background: transparent;
+        color: $white-bis;
+
+        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: rgba($white-bis, .7);
+          }
+    }
+}

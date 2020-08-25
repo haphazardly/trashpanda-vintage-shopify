@@ -1,6 +1,19 @@
 import '../sass/main.scss';
 import feather from 'feather-icons';
 
+function searchToggle() {
+    const searchToggable = [
+        document.querySelector('.search-close'),
+        document.querySelector('.search-open')
+    ];
+
+    searchToggable.forEach((toggle, i) => {
+        toggle.addEventListener('click', (event) => {
+            document.querySelector('#searchModal').classList.toggle('is-hidden');
+        });
+    });
+}
+
 function determineNavbarEnd() {
     if (window.innerWidth <= 1023) { 
         var e = document.querySelector('.navbar-end');
@@ -11,19 +24,17 @@ function determineNavbarEnd() {
     }
 }
 
-function addMenuToggle() {
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-    if ($navbarBurgers.length > 0) {
+function menuToggle() {
+    const primaryNavigation = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    if (primaryNavigation.length > 0) {
 
-        $navbarBurgers.forEach(el => {
+        primaryNavigation.forEach(el => {
             el.addEventListener('click', () => {
-
-                const target = el.dataset.target;
-                const $target = document.getElementById(target);
+                const target = el.dataset.target,
+                      elementTarget = document.getElementById(target);
 
                 el.classList.toggle('is-active');
-                $target.classList.toggle('is-active');
-
+                elementTarget.classList.toggle('is-active');
             });
         });
     }
@@ -31,7 +42,8 @@ function addMenuToggle() {
 
 document.addEventListener('DOMContentLoaded', function () {
     determineNavbarEnd();
-    addMenuToggle();
+    menuToggle();
+    searchToggle();
     feather.replace();
 });
 

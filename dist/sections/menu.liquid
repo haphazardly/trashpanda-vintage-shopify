@@ -10,7 +10,6 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-
     <div id="primary_navbar" class="navbar-menu">
       <div class="navbar-start">
         {% for link in linklists.main-menu.links %}
@@ -38,29 +37,13 @@
         {% endfor %}
         </div>
       </div>
-      
       <div class="navbar-end">
-        <div class="navbar-item">
+        <div class="navbar-item search-open">
           <i data-feather="search" aria-hidden="true" title="Search Store"> </i>
         </div>
         <a href="/cart" class="navbar-item">
           <i data-feather="shopping-bag" aria-hidden="true" title="Items in Cart"></i><span class="ml-1">{{ cart.item_count }}</span>
         </a>
-        {% comment %} <form class="d-flex" action="/search" method="get" role="search">
-          <label for="Search-{{ section.id }}" class="d-none">
-            {{ 'general.search.placeholder' | t }}
-          </label>
-          <input type="search" 
-                name="q" 
-                id="Search-{{ section.id }}" 
-                value="{{ search.terms | escape }}" 
-                placeholder="{{ 'general.search.placeholder' | t }}" 
-                class="form-control mr-2" 
-                aria-label="Search">
-          <button class="btn btn-outline-success">        
-            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-          </button>
-        </form> {% endcomment %}
       </div>
     </div>
   </nav>
